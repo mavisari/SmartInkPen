@@ -41,8 +41,76 @@ These signals are used to compute handwriting indicators in the following domain
 - inclination
 - frequency
 
-## MATLAB SCRITPS 
+## MATLAB scripts 
 The MATLAB scripts implement the full pipeline for signal analysis and statistical evaluation:
 - ```matlab FunctionIndicatorsComputationTA ``` computes handwriting indicators from raw sensor signals collected by the Smart Ink Pen.
 - ```matlab ScriptAnalisiAffidabilita.m ``` performs statistical analysis to evaluate the test-retest reliability of the extracted indicators.
+- ```matlab CalcoloMDC.m ``` computes the Minimal Detectable Change (MDC) for each indicator, which allows detecting significant variations in handwriting performance.
+- ```matlab AnalisiStatistica2.m ``` is the main statistical analysis script used for data processing and indicator evaluation.
+- ```matlab Trend.m ``` evaluates whether observed changes follow the expected pathological trend.
+- ```matlab Grafici_soggetti.m ``` generates visualizations showing trends and indicator evolution across trials.
+- ```matlab TestFisher2.m / TestFisherSPIRALE.m ``` perform statistical tests for significance analysis between indicators
 
+## Machine Learning Script
+```python mmse_classifier.py ``` implements a classification pipeline used to predict cognitive status based on handwriting indicators. Several models are tested, including: 
+- Support Vector Classifier (SVC)
+- Random Forest
+- CatBoost
+The classifier predicts whether a subject belongs to:
+- MMSE > 28 (healthy cognitive status)
+- MMSE ≤ 28 (potential cognitive decline)
+Feature selection and resampling strategies are also implemented to address feature correlation and dataset imbalance.
+
+# Installation 
+The project requires the following software: 
+## Matlab 
+Tested with ```matlab MATLAB R2022b``` 
+Required toolboxes: 
+- Statistics and Machine Learning Toolbox
+- Signal Processing Toolbox
+
+## Python 
+Python is required only for the machine learning classification module. Recommended version: ```python Python 3.9+```
+Install required packages: 
+```bash
+pip install numpy
+pip install pandas
+pip install scikit-learn
+pip install catboost
+pip install shap
+pip install matplotlib
+```
+
+# How to Run the Analysis 
+## MATLAB Analysis Pipeline 
+1. Load the dataset containing handwriting signals in ```matlab .mat ``` format.
+2. Compute handwriting indicators: ```matlab FunctionIndicatorsComputationTA ```
+3. Evaluate reliability: ```matlab ScriptAnalisiAffidabilita.m ```
+4. Compute Minimal Detectable Change: ```matlab CalcoloMDC.m ```
+5. Perform statistical analysis and generate results: ```matlab AnalisiStatistica2.m ```
+6. Study trends: ```matlab Trend.m ```
+7. Visualize subject-specific trends: ```matlab Grafici_soggetti.m ```
+
+## Machine Learning Classification
+Run the classification script:
+```bash
+python mmse_classifier.py
+```
+The script performs:
+- feature preprocessing
+- correlation filtering
+- dataset balancing
+- hyperparameter tuning using GridSearchCV
+- cross-validation
+- performance evaluation
+
+Metrics used include:
+- accuracy
+- precision
+- recall
+- F1-score
+- ROC-AUC
+Explainability analysis is performed using SHAP values to identify the most relevant handwriting indicators for classification.
+
+# Authors 
+Alberta Militante, Micol Moscatelli, Maria Vittoria Sari
