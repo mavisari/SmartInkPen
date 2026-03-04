@@ -43,6 +43,6 @@ These signals are used to compute handwriting indicators in the following domain
 
 ## MATLAB SCRITPS 
 The MATLAB scripts implement the full pipeline for signal analysis and statistical evaluation:
-```matlab
-FunctionIndicatorsComputationTA
-```
+- ```matlab FunctionIndicatorsComputationTA ``` computes handwriting indicators from raw sensor signals collected by the Smart Ink Pen.
+- ```matlab ScriptAnalisiAffidabilita.m ``` performs statistical analysis to evaluate the test-retest reliability of the extracted indicators.
+
